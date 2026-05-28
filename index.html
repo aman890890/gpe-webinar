@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Pendaftaran Webinar GPE May 2026</title>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+
+    <div class="header">
+      <span class="brand-badge">GPE V5 NEON</span>
+      <h1 class="title">PENDAFTARAN<br>WEBINAR MAY 2026</h1>
+      <p class="subtitle">Robot V5 Neon - Sila lengkapkan borang di bawah</p>
+    </div>
+
+    <div class="card">
+
+      <div class="user-info">
+        <span class="dot"></span>
+        <span>Telegram: <strong id="tg-user">Memuat...</strong></span>
+      </div>
+
+      <details id="diag-panel" class="diag-panel hidden">
+        <summary>Diagnostic Info (tap untuk papar)</summary>
+        <pre id="diag-output"></pre>
+      </details>
+
+      <div id="alert-box" class="alert error"></div>
+
+      <form id="reg-form" autocomplete="off">
+
+        <div class="field">
+          <label for="namaPenuh">Nama Penuh<span class="req">*</span></label>
+          <input type="text" id="namaPenuh" name="namaPenuh" class="input"
+                 placeholder="Cth: Ahmad bin Abdullah" required minlength="3" maxlength="80">
+        </div>
+
+        <div class="field">
+          <label for="noTelefon">No. Telefon / WhatsApp<span class="req">*</span></label>
+          <input type="tel" id="noTelefon" name="noTelefon" class="input"
+                 placeholder="0123456789" required pattern="[0-9+\-\s]{8,20}" maxlength="20">
+        </div>
+
+        <div class="field">
+          <label for="noMT5">No. Akaun MT5<span class="req">*</span></label>
+          <input type="text" id="noMT5" name="noMT5" class="input"
+                 inputmode="numeric" placeholder="Cth: 12345678" required pattern="[0-9]{4,12}" maxlength="12">
+        </div>
+
+        <div class="field">
+          <label for="broker">Nama Broker<span class="req">*</span></label>
+          <input type="text" id="broker" name="broker" class="input"
+                 placeholder="Cth: Exness / FBS / IC Markets" required maxlength="60">
+        </div>
+
+        <div class="field">
+          <label for="ib">Kod IB / Referral<span class="req">*</span></label>
+          <input type="text" id="ib" name="ib" class="input"
+                 placeholder="Nama IB atau Kod Referral" required maxlength="60">
+        </div>
+
+        <div class="field">
+          <label for="adminPic">Admin PIC<span class="req">*</span></label>
+          <select id="adminPic" name="adminPic" class="select" required disabled>
+            <option value="">Memuatkan senarai admin...</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Screenshot Deposit MT5<span class="req">*</span></label>
+          <div class="file-wrapper" id="file-wrapper">
+            <input type="file" id="screenshot" name="screenshot" accept="image/*" required>
+            <div class="file-icon">📸</div>
+            <div class="file-label" id="file-label">Tap untuk pilih screenshot</div>
+            <div class="file-hint" id="file-hint">Format: JPG / PNG / WEBP</div>
+          </div>
+          <div class="file-preview" id="file-preview"><img id="preview-img" alt=""></div>
+        </div>
+
+        <button type="submit" id="submit-btn" class="submit-btn" disabled>
+          <span id="btn-text">HANTAR PERMOHONAN</span>
+        </button>
+
+      </form>
+
+    </div>
+
+    <div class="footer">© GPE V5 NEON · Telegram WebApp</div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
