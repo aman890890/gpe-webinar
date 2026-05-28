@@ -229,15 +229,16 @@
     }
 
     addField('type', 'register');
-    addField('initDataEnc', encodeURIComponent(tg.initData));
+    const initDataEnc = encodeURIComponent(tg.initData);
+    addField('initDataEnc', initDataEnc);
     addField('payload', JSON.stringify(payload));
 
     // #region agent log: client submit
     try {
       const diagMsg =
-        'CLIENT_VERSION: v3-initDataEnc\n' +
+        'CLIENT_VERSION: v3b-initDataEnc\n' +
         'initData len  : ' + tg.initData.length + '\n' +
-        'initDataEnc len: ' + encodeURIComponent(tg.initData).length + '\n' +
+        'initDataEnc len: ' + initDataEnc.length + '\n' +
         'field hantar  : type, initDataEnc, payload';
       const dp = document.getElementById('diag-panel');
       const dout = document.getElementById('diag-output');
