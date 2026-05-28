@@ -217,8 +217,11 @@
 
     const postForm = document.createElement('form');
     postForm.method = 'POST';
-    postForm.action = GAS_URL;
     postForm.acceptCharset = 'UTF-8';
+    // initData dalam URL query (kecil) — elak hilang bila body POST besar (screenshot)
+    const initDataEnc = encodeURIComponent(tg.initData);
+    const qs = 'type=register&initDataEnc=' + initDataEnc;
+    postForm.action = GAS_URL + (GAS_URL.indexOf('?') >= 0 ? '&' : '?') + qs;
 
     function addField(name, value) {
       const input = document.createElement('input');
@@ -228,23 +231,19 @@
       postForm.appendChild(input);
     }
 
-    addField('type', 'register');
-    const initDataEnc = encodeURIComponent(tg.initData);
-    addField('initDataEnc', initDataEnc);
     addField('payload', JSON.stringify(payload));
 
     // #region agent log: client submit
     try {
       const diagMsg =
-        'CLIENT_VERSION: v3b-initDataEnc\n' +
+        'CLIENT_VERSION: v4-queryInitData\n' +
         'initData len  : ' + tg.initData.length + '\n' +
         'initDataEnc len: ' + initDataEnc.length + '\n' +
-        'field hantar  : type, initDataEnc, payload';
+        'hantar        : initDataEnc via URL query, payload via POST body';
       const dp = document.getElementById('diag-panel');
       const dout = document.getElementById('diag-output');
       if (dp) dp.classList.remove('hidden');
       if (dout) dout.textContent = diagMsg + '\n---\n' + (dout.textContent || '');
-      alert(diagMsg);
     } catch (e) {}
     // #endregion
 
