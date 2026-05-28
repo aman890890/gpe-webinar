@@ -61,13 +61,12 @@
     const initRaw = tg ? (tg.initData || '') : '';
     const initUnsafe = tg ? (tg.initDataUnsafe || {}) : {};
     const lines = [
-      'host: GitHub Pages (bukan GAS iframe)',
+      'host: GitHub Pages',
       'GAS_EXEC_URL: ' + (GAS_URL ? GAS_URL.substring(0, 60) + '...' : 'BELUM SET'),
       'window.Telegram: ' + (window.Telegram ? 'YA' : 'TIDAK'),
-      'tg.initData length: ' + initRaw.length,
-      'tg.initDataUnsafe.user: ' + JSON.stringify(initUnsafe.user || null),
-      'location.hash: ' + (window.location.hash || 'KOSONG').substring(0, 80),
-      'top !== self (iframe?): ' + (window.top !== window.self)
+      'tgUser.id: ' + (tgUser.id || 'KOSONG'),
+      'tgUser.username: ' + (tgUser.username || '-'),
+      'tg.initData length: ' + initRaw.length
     ];
     out.textContent = lines.join('\n');
   }
@@ -84,7 +83,7 @@
     tgUserEl.textContent = label;
   } else {
     tgUserEl.textContent = '(Buka dari Menu Button bot di Telegram)';
-    showError('Sila buka borang ini dari Menu Button bot @gpeviprobot di Telegram (bukan pautan terus).');
+    showError('Sila buka borang ini dari Menu Button bot @rndgpeviprobot di Telegram (bukan pautan terus).');
   }
 
   window.onAdminsLoaded = function(data) {
@@ -182,8 +181,8 @@
     e.preventDefault();
     hideAlerts();
 
-    if (!tg || !tg.initData) {
-      showError('initData Telegram tidak tersedia. Buka semula dari Menu Button bot.');
+    if (!tgUser.id) {
+      showError('Sila buka borang dari Menu Button @rndgpeviprobot di Telegram.');
       return;
     }
     if (!fileBase64) {
@@ -210,6 +209,11 @@
         base64: fileBase64,
         mimeType: fileMime,
         fileName: fileName
+      },
+      tgUser: {
+        id: tgUser.id,
+        username: tgUser.username,
+        first_name: tgUser.first_name
       }
     };
 
@@ -218,10 +222,7 @@
     const postForm = document.createElement('form');
     postForm.method = 'POST';
     postForm.acceptCharset = 'UTF-8';
-    // initData dalam URL query (kecil) — elak hilang bila body POST besar (screenshot)
-    const initDataEnc = encodeURIComponent(tg.initData);
-    const qs = 'type=register&initDataEnc=' + initDataEnc;
-    postForm.action = GAS_URL + (GAS_URL.indexOf('?') >= 0 ? '&' : '?') + qs;
+    postForm.action = GAS_URL + (GAS_URL.indexOf('?') >= 0 ? '&' : '?') + 'type=register';
 
     function addField(name, value) {
       const input = document.createElement('input');
@@ -232,20 +233,6 @@
     }
 
     addField('payload', JSON.stringify(payload));
-
-    // #region agent log: client submit
-    try {
-      const diagMsg =
-        'CLIENT_VERSION: v4-queryInitData\n' +
-        'initData len  : ' + tg.initData.length + '\n' +
-        'initDataEnc len: ' + initDataEnc.length + '\n' +
-        'hantar        : initDataEnc via URL query, payload via POST body';
-      const dp = document.getElementById('diag-panel');
-      const dout = document.getElementById('diag-output');
-      if (dp) dp.classList.remove('hidden');
-      if (dout) dout.textContent = diagMsg + '\n---\n' + (dout.textContent || '');
-    } catch (e) {}
-    // #endregion
 
     document.body.appendChild(postForm);
     postForm.submit();
@@ -273,10 +260,6 @@
   function hideAlerts() {
     alertBox.classList.remove('show');
     alertBox.textContent = '';
-  }
-
-  function toBase64Utf8_(str) {
-    return btoa(unescape(encodeURIComponent(str)));
   }
 
   function escapeHtml(s) {
