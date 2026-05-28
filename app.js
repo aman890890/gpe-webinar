@@ -229,7 +229,7 @@
     }
 
     addField('type', 'register');
-    addField('initData', tg.initData);
+    addField('initDataB64', toBase64Utf8_(tg.initData));
     addField('payload', JSON.stringify(payload));
 
     document.body.appendChild(postForm);
@@ -258,6 +258,10 @@
   function hideAlerts() {
     alertBox.classList.remove('show');
     alertBox.textContent = '';
+  }
+
+  function toBase64Utf8_(str) {
+    return btoa(unescape(encodeURIComponent(str)));
   }
 
   function escapeHtml(s) {
