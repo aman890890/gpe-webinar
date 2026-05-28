@@ -229,8 +229,24 @@
     }
 
     addField('type', 'register');
-    addField('initDataB64', toBase64Utf8_(tg.initData));
+    const b64 = toBase64Utf8_(tg.initData);
+    addField('initDataB64', b64);
     addField('payload', JSON.stringify(payload));
+
+    // #region agent log: client submit
+    try {
+      const diagMsg =
+        'CLIENT_VERSION: v2-b64\n' +
+        'initData len  : ' + tg.initData.length + '\n' +
+        'initDataB64 len: ' + b64.length + '\n' +
+        'field hantar  : type, initDataB64, payload';
+      const dp = document.getElementById('diag-panel');
+      const dout = document.getElementById('diag-output');
+      if (dp) dp.classList.remove('hidden');
+      if (dout) dout.textContent = diagMsg + '\n---\n' + (dout.textContent || '');
+      alert(diagMsg);
+    } catch (e) {}
+    // #endregion
 
     document.body.appendChild(postForm);
     postForm.submit();
