@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Pendaftaran Webinar GPE June 2026</title>
+  <title>GPE Webinar June 2026 — Registration</title>
 
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,11 +16,11 @@
 
     <div class="header">
       <span class="brand-badge">GPE V5 NEON</span>
-      <h1 class="title">PENDAFTARAN<br>WEBINAR JUNE 2026</h1>
-      <p class="subtitle">Robot V5 Neon - Sila lengkapkan borang di bawah</p>
+      <h1 class="title">REGISTRATION<br>WEBINAR JUNE 2026</h1>
+      <p class="subtitle">Robot V5 Neon — Please complete the form below</p>
       <div class="event-banner">
         <div class="event-date">9<sup>th</sup> &amp; 10<sup>th</sup> June 2026</div>
-        <div class="event-perk">🎁 10 orang terawal akan terima merchandise GPE</div>
+        <div class="event-perk">🎁 The first 10 registrants will receive GPE merchandise</div>
       </div>
     </div>
 
@@ -28,11 +28,11 @@
 
       <div class="user-info">
         <span class="dot"></span>
-        <span>Telegram: <strong id="tg-user">Memuat...</strong></span>
+        <span>Telegram: <strong id="tg-user">Loading...</strong></span>
       </div>
 
       <details id="diag-panel" class="diag-panel hidden">
-        <summary>Diagnostic Info (tap untuk papar)</summary>
+        <summary>Diagnostic info (tap to expand)</summary>
         <pre id="diag-output"></pre>
       </details>
 
@@ -41,50 +41,50 @@
       <form id="reg-form" autocomplete="off">
 
         <div class="field">
-          <label for="namaPenuh">Nama Penuh<span class="req">*</span></label>
+          <label for="namaPenuh">Full Name<span class="req">*</span></label>
           <input type="text" id="namaPenuh" name="namaPenuh" class="input"
-                 placeholder="Cth: Ahmad bin Abdullah" required minlength="3" maxlength="80">
+                 placeholder="e.g. Ahmad bin Abdullah" required minlength="3" maxlength="80">
         </div>
 
         <div class="field">
-          <label for="noTelefon">No. Telefon<span class="req">*</span></label>
+          <label for="noTelefon">Phone Number<span class="req">*</span></label>
           <input type="tel" id="noTelefon" name="noTelefon" class="input"
                  placeholder="0123456789" required pattern="[0-9+\-\s]{8,20}" maxlength="20">
         </div>
 
         <div class="field">
-          <label for="noMT5">No. Akaun MT5<span class="req">*</span></label>
+          <label for="noMT5">MT5 Account No.<span class="req">*</span></label>
           <input type="text" id="noMT5" name="noMT5" class="input"
-                 inputmode="numeric" placeholder="Cth: 12345678" required pattern="[0-9]{4,12}" maxlength="12">
+                 inputmode="numeric" placeholder="e.g. 12345678" required pattern="[0-9]{4,12}" maxlength="12">
         </div>
 
         <div class="field">
-          <label for="email">Emel<span class="req">*</span></label>
+          <label for="email">Email<span class="req">*</span></label>
           <input type="email" id="email" name="email" class="input"
-                 placeholder="Cth: nama@gmail.com" required maxlength="80"
+                 placeholder="e.g. name@gmail.com" required maxlength="80"
                  autocomplete="email" inputmode="email">
         </div>
 
         <div class="field">
           <label for="adminPic">Admin PIC<span class="req">*</span></label>
           <select id="adminPic" name="adminPic" class="select" required disabled>
-            <option value="">Memuatkan senarai admin...</option>
+            <option value="">Loading admin list...</option>
           </select>
         </div>
 
         <div class="field">
-          <label>Screenshot Deposit MT5<span class="req">*</span></label>
+          <label>MT5 Deposit Screenshot<span class="req">*</span></label>
           <div class="file-wrapper" id="file-wrapper">
             <input type="file" id="screenshot" name="screenshot" accept="image/*" required>
             <div class="file-icon">📸</div>
-            <div class="file-label" id="file-label">Tap untuk pilih screenshot</div>
+            <div class="file-label" id="file-label">Tap to choose screenshot</div>
             <div class="file-hint" id="file-hint">Format: JPG / PNG / WEBP</div>
           </div>
           <div class="file-preview" id="file-preview"><img id="preview-img" alt=""></div>
         </div>
 
         <button type="submit" id="submit-btn" class="submit-btn" disabled>
-          <span id="btn-text">HANTAR PERMOHONAN</span>
+          <span id="btn-text">SUBMIT APPLICATION</span>
         </button>
 
       </form>
