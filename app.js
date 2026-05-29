@@ -186,7 +186,7 @@
       return;
     }
     if (!fileBase64) {
-      showError('Please choose the MT5 deposit screenshot.');
+      showError('Please attach your $300 deposit screenshot (MT5).');
       return;
     }
     if (!adminSel.value) {
