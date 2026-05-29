@@ -1,4 +1,4 @@
-﻿  /* =============================================================
+  /* =============================================================
      WEBINAR V5 NEON - DARK BLUE NEON + GOLD ACCENT
      ============================================================= */
   :root {
@@ -92,6 +92,34 @@
     font-size: 13px;
     margin-top: 6px;
     letter-spacing: 0.5px;
+  }
+
+  .event-banner {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border: 1px solid var(--gold);
+    border-radius: 12px;
+    background: rgba(255, 215, 0, 0.06);
+    box-shadow: var(--glow-gold);
+  }
+  .event-banner .event-date {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--gold);
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+  }
+  .event-banner .event-date sup {
+    font-size: 9px;
+    vertical-align: super;
+    margin-left: 1px;
+    color: var(--gold-dim);
+  }
+  .event-banner .event-perk {
+    color: var(--text-primary);
+    font-size: 12px;
+    margin-top: 4px;
+    letter-spacing: 0.3px;
   }
 
   /* ---------- CARD ---------- */
