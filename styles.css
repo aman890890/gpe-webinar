@@ -106,100 +106,25 @@
     box-shadow: var(--glow-gold);
   }
 
-  .cube-scene {
+  .gift-wrap {
     flex-shrink: 0;
     width: 56px;
     height: 56px;
-    perspective: 280px;
-    perspective-origin: 50% 45%;
+    perspective: 220px;
   }
 
-  .cube {
-    position: relative;
+  .gift-box-3d {
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
-    animation: cubeSpin 5s linear infinite;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.45))
-            drop-shadow(0 0 6px rgba(255, 215, 0, 0.5));
+    animation: giftSpin 5s linear infinite;
+    filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.55));
     will-change: transform;
   }
 
-  @keyframes cubeSpin {
-    0%   { transform: rotateX(-20deg) rotateY(0deg); }
-    100% { transform: rotateX(-20deg) rotateY(360deg); }
-  }
-
-  .cube-face {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, #ffe566 0%, #ffd700 45%, #b8860b 100%);
-    border: 1px solid rgba(184, 134, 11, 0.6);
-    overflow: hidden;
-    backface-visibility: hidden;
-  }
-
-  .cube-face--front  { transform: translateZ(28px); }
-  .cube-face--back   { transform: rotateY(180deg) translateZ(28px); }
-  .cube-face--right  { transform: rotateY(90deg) translateZ(28px); }
-  .cube-face--left   { transform: rotateY(-90deg) translateZ(28px); }
-  .cube-face--top {
-    transform: rotateX(90deg) translateZ(28px);
-    background: linear-gradient(135deg, #fff0a0 0%, #ffd700 50%, #d4a800 100%);
-  }
-  .cube-face--bottom {
-    transform: rotateX(-90deg) translateZ(28px);
-    background: linear-gradient(135deg, #8b6914 0%, #b8860b 100%);
-  }
-
-  .ribbon-v,
-  .ribbon-h {
-    position: absolute;
-    background: linear-gradient(180deg, #00b4ff 0%, #0080ff 100%);
-    box-shadow: 0 0 4px rgba(0, 180, 255, 0.55);
-  }
-  .ribbon-v {
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 10px;
-    margin-left: -5px;
-  }
-  .ribbon-h {
-    left: 0;
-    right: 0;
-    top: 50%;
-    height: 10px;
-    margin-top: -5px;
-  }
-
-  .bow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 24px;
-    height: 14px;
-    margin: -7px 0 0 -12px;
-    pointer-events: none;
-  }
-  .bow::before,
-  .bow::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    width: 11px;
-    height: 14px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #ffe566 0%, #ffd700 50%, #b8860b 100%);
-    box-shadow: 0 0 3px rgba(255, 215, 0, 0.7);
-  }
-  .bow::before {
-    left: 0;
-    transform: rotate(-15deg);
-  }
-  .bow::after {
-    right: 0;
-    transform: rotate(15deg);
+  @keyframes giftSpin {
+    0%   { transform: rotateX(15deg) rotateY(0deg); }
+    100% { transform: rotateX(15deg) rotateY(360deg); }
   }
 
   .event-text {
@@ -231,25 +156,23 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .cube {
-      animation: cubePulse 3s ease-in-out infinite;
+    .gift-box-3d {
+      animation: giftPulse 3s ease-in-out infinite;
     }
-    @keyframes cubePulse {
+    @keyframes giftPulse {
       0%, 100% {
-        transform: rotateX(-20deg) rotateY(0deg);
-        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4))
-                drop-shadow(0 0 4px rgba(255, 215, 0, 0.4));
+        transform: rotateX(15deg) rotateY(0deg);
+        filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.4));
       }
       50% {
-        transform: rotateX(-20deg) rotateY(0deg) scale(1.08);
-        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5))
-                drop-shadow(0 0 12px rgba(255, 215, 0, 0.85));
+        transform: rotateX(15deg) rotateY(0deg) scale(1.08);
+        filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
       }
     }
   }
 
   @media (hover: hover) {
-    .event-banner:hover .cube {
+    .event-banner:hover .gift-box-3d {
       animation-play-state: paused;
     }
   }
@@ -555,19 +478,7 @@
     .title { font-size: 22px; letter-spacing: 1.5px; }
     .card { padding: 18px 16px; }
 
-    .cube-scene { width: 44px; height: 44px; perspective: 220px; }
-    .cube-face--front  { transform: translateZ(22px); }
-    .cube-face--back   { transform: rotateY(180deg) translateZ(22px); }
-    .cube-face--right  { transform: rotateY(90deg) translateZ(22px); }
-    .cube-face--left   { transform: rotateY(-90deg) translateZ(22px); }
-    .cube-face--top    { transform: rotateX(90deg) translateZ(22px); }
-    .cube-face--bottom { transform: rotateX(-90deg) translateZ(22px); }
-
-    .ribbon-v { width: 8px; margin-left: -4px; }
-    .ribbon-h { height: 8px; margin-top: -4px; }
-    .bow { width: 20px; height: 12px; margin: -6px 0 0 -10px; }
-    .bow::before,
-    .bow::after { width: 9px; height: 12px; }
+    .gift-wrap { width: 44px; height: 44px; perspective: 180px; }
 
     .event-banner { gap: 10px; padding: 10px 12px; }
     .event-banner .event-date { font-size: 13px; letter-spacing: 1px; }
