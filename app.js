@@ -202,8 +202,7 @@
       namaPenuh: $('namaPenuh').value.trim(),
       noTelefon: $('noTelefon').value.trim(),
       noMT5: $('noMT5').value.trim(),
-      broker: $('broker').value.trim(),
-      ib: $('ib').value.trim(),
+      email: $('email').value.trim(),
       adminPicName: adminSel.value,
       screenshot: {
         base64: fileBase64,
