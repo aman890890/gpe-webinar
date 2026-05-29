@@ -46,7 +46,7 @@
   const btnText = $('btn-text');
 
   if (fileHint) {
-    fileHint.textContent = 'Format: JPG / PNG / WEBP - Maks ' + MAX_FILE_MB + 'MB';
+    fileHint.textContent = 'Format: JPG / PNG / WEBP - Max ' + MAX_FILE_MB + 'MB';
   }
 
   if (new URLSearchParams(window.location.search).get('debug') === '1') {
@@ -62,9 +62,9 @@
     const initUnsafe = tg ? (tg.initDataUnsafe || {}) : {};
     const lines = [
       'host: GitHub Pages',
-      'GAS_EXEC_URL: ' + (GAS_URL ? GAS_URL.substring(0, 60) + '...' : 'BELUM SET'),
-      'window.Telegram: ' + (window.Telegram ? 'YA' : 'TIDAK'),
-      'tgUser.id: ' + (tgUser.id || 'KOSONG'),
+      'GAS_EXEC_URL: ' + (GAS_URL ? GAS_URL.substring(0, 60) + '...' : 'NOT SET'),
+      'window.Telegram: ' + (window.Telegram ? 'YES' : 'NO'),
+      'tgUser.id: ' + (tgUser.id || 'EMPTY'),
       'tgUser.username: ' + (tgUser.username || '-'),
       'tg.initData length: ' + initRaw.length
     ];
@@ -72,7 +72,7 @@
   }
 
   if (!GAS_URL || GAS_URL.indexOf('YOUR_DEPLOYMENT') >= 0) {
-    showError('Sila edit config.js - set GAS_EXEC_URL kepada URL /exec Apps Script anda.');
+    showError('Please edit config.js — set GAS_EXEC_URL to your Apps Script /exec URL.');
   }
 
   if (tgUser.id) {
@@ -82,18 +82,18 @@
     else label = 'ID ' + tgUser.id;
     tgUserEl.textContent = label;
   } else {
-    tgUserEl.textContent = '(Buka dari Menu Button bot di Telegram)';
-    showError('Sila buka borang ini dari Menu Button bot @rndgpeviprobot di Telegram (bukan pautan terus).');
+    tgUserEl.textContent = '(Open from the bot Menu Button in Telegram)';
+    showError('Please open this form from the Menu Button of @rndgpeviprobot in Telegram (not via a direct link).');
   }
 
   window.onAdminsLoaded = function(data) {
     cleanupAdminsScript();
     if (!data || !data.ok || !data.admins || !data.admins.length) {
-      adminSel.innerHTML = '<option value="">(Tiada admin aktif)</option>';
-      showError('Tiada admin aktif. Sila hubungi admin.');
+      adminSel.innerHTML = '<option value="">(No active admins)</option>';
+      showError('No active admins available. Please contact your admin.');
       return;
     }
-    let html = '<option value="">-- Pilih Admin PIC --</option>';
+    let html = '<option value="">-- Select Admin PIC --</option>';
     for (let i = 0; i < data.admins.length; i++) {
       const adm = data.admins[i];
       const label = adm.username ? (adm.name + ' (' + adm.username + ')') : adm.name;
@@ -112,8 +112,8 @@
     script.src = GAS_URL + '?action=get_admins&callback=' + cb + '&_=' + Date.now();
     script.onerror = function() {
       cleanupAdminsScript();
-      adminSel.innerHTML = '<option value="">(Gagal memuatkan)</option>';
-      showError('Gagal memuatkan senarai admin. Semak GAS_EXEC_URL dalam config.js.');
+      adminSel.innerHTML = '<option value="">(Failed to load)</option>';
+      showError('Failed to load admin list. Check GAS_EXEC_URL in config.js.');
     };
     document.body.appendChild(script);
   }
@@ -136,12 +136,12 @@
       return;
     }
     if (!/^image\//i.test(file.type)) {
-      showError('Hanya fail imej (JPG/PNG/WEBP) dibenarkan.');
+      showError('Only image files (JPG/PNG/WEBP) are allowed.');
       resetFile();
       return;
     }
     if (file.size > MAX_FILE_BYTES) {
-      showError('Saiz fail melebihi ' + MAX_FILE_MB + 'MB.');
+      showError('File size exceeds ' + MAX_FILE_MB + 'MB.');
       resetFile();
       return;
     }
@@ -160,7 +160,7 @@
       filePrev.classList.add('show');
     };
     reader.onerror = function() {
-      showError('Gagal membaca fail.');
+      showError('Failed to read the file.');
       resetFile();
     };
     reader.readAsDataURL(file);
@@ -171,7 +171,7 @@
     fileMime = '';
     fileName = '';
     fileInput.value = '';
-    fileLabel.textContent = 'Tap untuk pilih screenshot';
+    fileLabel.textContent = 'Tap to choose screenshot';
     fileWrap.classList.remove('has-file');
     filePrev.classList.remove('show');
     previewImg.src = '';
@@ -182,15 +182,15 @@
     hideAlerts();
 
     if (!tgUser.id) {
-      showError('Sila buka borang dari Menu Button @rndgpeviprobot di Telegram.');
+      showError('Please open the form from the Menu Button of @rndgpeviprobot in Telegram.');
       return;
     }
     if (!fileBase64) {
-      showError('Sila pilih screenshot deposit MT5.');
+      showError('Please choose the MT5 deposit screenshot.');
       return;
     }
     if (!adminSel.value) {
-      showError('Sila pilih Admin PIC.');
+      showError('Please select an Admin PIC.');
       return;
     }
     if (!form.checkValidity()) {
@@ -240,10 +240,10 @@
   function setLoading(loading) {
     if (loading) {
       submitBtn.disabled = true;
-      btnText.innerHTML = '<span class="spinner"></span>MENGHANTAR...';
+      btnText.innerHTML = '<span class="spinner"></span>SUBMITTING...';
     } else {
       submitBtn.disabled = !tgUser.id;
-      btnText.textContent = 'HANTAR PERMOHONAN';
+      btnText.textContent = 'SUBMIT APPLICATION';
     }
   }
 
